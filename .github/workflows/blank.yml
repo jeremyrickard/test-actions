@@ -11,5 +11,10 @@ jobs:
     - uses: actions/checkout@v1
     - name: Setup Porter
       uses: jeremyrickard/porter-gh-action@master
-    - name: Run a one-line script
-      run: porter version
+    - uses: azure/docker-login@v1
+      name: Docker Login
+      with:
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - name: Porter Publish
+      run: porter publish
